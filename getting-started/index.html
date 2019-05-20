@@ -1,0 +1,945 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A Material Design theme for MkDocs">
+      
+      
+        <link rel="canonical" href="https://squidfunk.github.io/mkdocs-material/getting-started/">
+      
+      
+        <meta name="author" content="Martin Donath">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>Algoritma KNN - Material for MkDocs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "None", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#metode-k-nn-k-nearest-neigboor-untuk-klasifikasi-data-iris" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Material for MkDocs
+            </span>
+            <span class="md-header-nav__topic">
+              Algoritma KNN
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/squidfunk/mkdocs-material" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    squidfunk/mkdocs-material
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="KNN" class="md-tabs__link md-tabs__link--active">
+        KNN
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../extensions/admonition/" title="Extensions" class="md-tabs__link">
+          Extensions
+        </a>
+      
+    </li>
+  
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Material for MkDocs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/squidfunk/mkdocs-material" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    squidfunk/mkdocs-material
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="KNN" class="md-nav__link">
+      KNN
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Algoritma KNN
+      </label>
+    
+    <a href="./" title="Algoritma KNN" class="md-nav__link md-nav__link--active">
+      Algoritma KNN
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mempersiapkan-dataset" title="Mempersiapkan Dataset" class="md-nav__link">
+    Mempersiapkan Dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sejenak-soal-knn" title="Sejenak Soal KNN" class="md-nav__link">
+    Sejenak Soal KNN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partisi-data" title="Partisi Data" class="md-nav__link">
+    Partisi Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-test-data" title="Train Test Data" class="md-nav__link">
+    Train Test Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k-fold-cross-validation" title="K-Fold Cross Validation" class="md-nav__link">
+    K-Fold Cross Validation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-validation" title="Cross Validation" class="md-nav__link">
+    Cross Validation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tuning-parameter-hyperparameter" title="Tuning Parameter (Hyperparameter)" class="md-nav__link">
+    Tuning Parameter (Hyperparameter)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-data" title="Plotting Data" class="md-nav__link">
+    Plotting Data
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Extensions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Extensions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/admonition/" title="Admonition" class="md-nav__link">
+      Admonition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/codehilite/" title="CodeHilite" class="md-nav__link">
+      CodeHilite
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/footnotes/" title="Footnotes" class="md-nav__link">
+      Footnotes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/metadata/" title="Metadata" class="md-nav__link">
+      Metadata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/permalinks/" title="Permalinks" class="md-nav__link">
+      Permalinks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../extensions/pymdown/" title="PyMdown" class="md-nav__link">
+      PyMdown
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../specimen/" title="Specimen" class="md-nav__link">
+      Specimen
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../customization/" title="Implementasi KNN" class="md-nav__link">
+      Implementasi KNN
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../compliance/" title="Decision Tree" class="md-nav__link">
+      Decision Tree
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../release-notes/" title="Release notes" class="md-nav__link">
+      Release notes
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../authors-notes/" title="Algoritma Decision Tree" class="md-nav__link">
+      Algoritma Decision Tree
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing/" title="Implementasi Decision Tree" class="md-nav__link">
+      Implementasi Decision Tree
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../license/" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mempersiapkan-dataset" title="Mempersiapkan Dataset" class="md-nav__link">
+    Mempersiapkan Dataset
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sejenak-soal-knn" title="Sejenak Soal KNN" class="md-nav__link">
+    Sejenak Soal KNN
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partisi-data" title="Partisi Data" class="md-nav__link">
+    Partisi Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#train-test-data" title="Train Test Data" class="md-nav__link">
+    Train Test Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k-fold-cross-validation" title="K-Fold Cross Validation" class="md-nav__link">
+    K-Fold Cross Validation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-validation" title="Cross Validation" class="md-nav__link">
+    Cross Validation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tuning-parameter-hyperparameter" title="Tuning Parameter (Hyperparameter)" class="md-nav__link">
+    Tuning Parameter (Hyperparameter)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-data" title="Plotting Data" class="md-nav__link">
+    Plotting Data
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="metode-k-nn-k-nearest-neigboor-untuk-klasifikasi-data-iris">Metode K-NN (K-Nearest Neigboor) Untuk Klasifikasi data Iris<a class="headerlink" href="#metode-k-nn-k-nearest-neigboor-untuk-klasifikasi-data-iris" title="Permanent link">&para;</a></h1>
+<h3 id="mempersiapkan-dataset">Mempersiapkan Dataset<a class="headerlink" href="#mempersiapkan-dataset" title="Permanent link">&para;</a></h3>
+<p>Di tutorial ini, kita bakal pake dataset yang udah populer, namanya Iris. Ini udah tersedia by default dari Sklearnnya. Dataset ini isinya tentang 3 macam spesies bunga beserta ukuran  petal dan sepal.</p>
+<p>Nah,  data ini adalah csv, yang kalo dijadikan tabel, tiap barisnya  menunjukan berbagai jenis spesies bunga yang berbeda, sedangkan kolomnya  menunjukan fitur data yaitu : sepal length, sepal width, petal length,  dan petal width secara berurutan (ada 4 kolom).</p>
+<p>Jenis  bunganya ada 3 : setosa, versicolor dan virginica. Ada 50 sampel data  tiap jenis bunga nya. jadi kalo di total ada 50x3 sampel data = 150  sampel.</p>
+<pre class="codehilite"><code># disini import datanya dari sklearn
+from sklearn.datasets import load_iris
+iris=load_iris()   #datanya di load dulu!
+x=iris.data    #fitur data, di print aja kalo mau lihat
+y=iris.target   #label data, di print aja kalo mau lihat</code></pre>
+
+<blockquote>
+<p>iris.target_names : buat tahu arti dari iris.target sebenarnya.
+iris.feature_names : buat tahu arti dari fitur2 di iris.data
+type(iris.data) : kalo mau tahu tipedata nya iris data
+iris.data.shape : kalo mau tahu shape atau bentuk metriks dari iris data</p>
+</blockquote>
+<p>Kita pisahkan antara fitur dan labelnya di x dan y. Kalo di  Machine Learning, Fitur itu kaya ciri-cirinya dan Label tuh ya namanya.  Misal, Bunga spesies Sentosa punya ukuran panjang petal 3.2, lebar  petal 2.3, panjang sepal 2.1 dan lebar sepal 1.2. Nah kalo di ML  fiturnya adalah kesemua ukuran petal dan sepal. Labelnya adalah spesies  Sentosa.</p>
+<p>Di SKlearn, ada beberapa syarat yang harus dipenuhi :</p>
+<ol>
+<li>Fitur dan label harus dipisah jadi objek yang berbeda,.</li>
+<li>Fitur dan label harus numeric, jadi kalo 
+   misal label diatas itu nama-nama bunga, kita ganti jadi nomor, misal 
+   sentosa=0, versicolor=1, virginica=2.</li>
+<li>Fitur dan label harus dalam 
+   format Numpy array.</li>
+<li>Fitur dan label harus dalam bentuk metriks yang spesifik.</li>
+</ol>
+<p>Setelah ini kita bakal training data2 tadi dengan metode klasifikasi KNN (K-Nearest Neighbor).</p>
+<h3 id="sejenak-soal-knn">Sejenak Soal KNN<a class="headerlink" href="#sejenak-soal-knn" title="Permanent link">&para;</a></h3>
+<p>KNN  adalah salah satu metode klasifikasi yang sangat amat simple dan mudah.  Jadi  intinya KNN itu berbasiskan tetangga terdekat. Akurasi KNN biasanya  tergantung K-nya. Maksudnya, jumlah tetangga yang terdekat. Misal, K=4  untuk klasifikasi ‘a’ apakah termasuk bebek atau sapi. Disini kita lihat  4 posisi tetangga terdekat dari ‘a’. Eh ternyata ada 3 sapi yang lebih  deket jaraknya sama ‘a’ sedangkan cuma 1 bebek yang deket sama ‘a’.  Disini bisa disimpulkan kalo ‘a’ adalah sapi.</p>
+<pre class="codehilite"><code>from sklearn.neighbors import KNeighborsClassifier
+import numpy as np</code></pre>
+
+<pre class="codehilite"><code>knn=KNeighborsClassifier(n_neighbors=1) #define K=1</code></pre>
+
+<pre class="codehilite"><code>knn.fit(x,y)
+a=np.array([1.0,2.7,3.6,4.2])
+knn.predict(a)</code></pre>
+
+<p>OOP (Object Oriented Python),Jadi ketika kita ngimpor class <em>KNeighborsClassifier</em> dari library Sklearn, ada beberapa atribut disana, yaitu parameter-parameter penting buat KNN, kaya <em>n_neighbors</em> yang menentukan jumlah K di KNN. Jadi pas kita define <em>knn=KNeighborsClassifier(n_neighbors=1)</em>,  kita sebenernya kaya manggil class KNeighborsClassifier tapi dengan  nama ‘knn’. Ini namanya ‘instantiate’ the ‘instance’. Kamu bisa baca2  lagi deh soal OOP. 
+Nah terus kalo kita print(knn) nya bakal ketahuan tuh parameter2 asli dari si class <em>KNeighborsClassifier</em>,  yang mana sebenernya gapapa kalo kita ga panggil pas inisiasi instance  ‘knn’, cuman kalo ga dipanggil atau ga di set sendiri, ya bakal ke-’set’  sendiri secara default.</p>
+<p>Next, apa yang terjadi di <em>knn.fit(x,y)</em>?  well itu kamu perlu tahu matematikanya KNN. Yang kita tau di Sklearn  kita udah terima jadi. Jadi pas kita code knn.fit(x,y), si KNN bakal  belajar dari fitur dan label2 yang ada. Sehingga, pas kita masukin data  baru, yang kita define sebagai ‘a’ diatas ke knn.predict(a), si KNN  bakal otomatis ngasih tau kira2 ‘a’ itu masuk klasifikasi label yang  mana. 0,1 atau 2. Nah jawabannya itu array([2]) artinya label 2, which  is spesies virginica.</p>
+<h3 id="partisi-data">Partisi Data<a class="headerlink" href="#partisi-data" title="Permanent link">&para;</a></h3>
+<p>Data  yang kita punya kudu dipartisi atau dibagi-bagi jadi train data dan  test data. Biasanya ukurannya 8:2 buat train vs test datanya. Di  tutorial ini kita bakal tau 2 jenis pembagian data yaitu:</p>
+<ol>
+<li>Train Test Split</li>
+<li>K-fold</li>
+</ol>
+<h3 id="train-test-data">Train Test Data<a class="headerlink" href="#train-test-data" title="Permanent link">&para;</a></h3>
+<p>Yang  akan kita lakukan adalah ngebagi kesemua 150 data jadi 2 bagian, data  training dan data testing. Perbandingannya bakal otomatis 80:20 persen. Jadi  bakal ada x buat training dan testing, begitu juga dengan ‘y’ bakal ada y  buat training dan testing. BTW testing itu digunain buat prediksi.</p>
+<pre class="codehilite"><code>from sklearn.cross_validation import train_test_split
+from sklearn import metrics</code></pre>
+
+<pre class="codehilite"><code>x_train, x_test, y_train, y_test = train_test_split(x,y,random_state=5)</code></pre>
+
+<pre class="codehilite"><code>print(x_train.shape) #buat tau bentuknya x_train (112 baris dan 4 kolom)
+print(x_test.shape)  #buat tau bentuknya x_test (38 baris dan 4 kolom)</code></pre>
+
+<pre class="codehilite"><code>knn.fit(x_train, y_train)
+y_pred = knn.predict(x_test)
+print(y_pred)  #hasil prediksi 
+print(y_test)  #jawaban yang sebenarnya</code></pre>
+
+<pre class="codehilite"><code>print(metrics.accuracy_score(y_test, y_pred))  #score prediksi</code></pre>
+
+<p>Jadi x_train ada 112 data (80-an%) dan x_test ada 38 data (20-an%). 
+Terus  kita mulai training x_train dan y_train. terus x_test nya di prediksi  dan dimasukan ke variabel ‘y_pred’ yang bakal jadi array yang berisi  hasil klasifikasi dari ke-38 data dari x_test.</p>
+<p>Finally,  kita lihat akurasi dari prediksi tadi. Pas ini kita bandingin y_test  dan y_pred, karena y_test itu adalah hasil yang seharusya. jadi akurasi  disini ngitung sejauh mana sih si ‘y_pred’ ini memenuhi jawaban yang  sesungguhnya, yaitu ‘y_test’?</p>
+<h3 id="k-fold-cross-validation">K-Fold Cross Validation<a class="headerlink" href="#k-fold-cross-validation" title="Permanent link">&para;</a></h3>
+<p>K-fold  adalah salah satu metode Cross Validation yang populer dengan melipat  data sebanyak K dan mengulangi (men-iterasi) experimennya sebanyak K  juga.</p>
+<p>Misal  nih, data kita ada 150. Ibarat kita pake K=5, berarti kita bagi 150  data menjadi 5 lipatan, isinya masing-masing 30 data. Eits, jangan lupa,  kita perlu menentukan mana yang training data dan mana yang test data.  Karena perbandingannya 80:20, berarti 120 data adalah training data dan  30 sisanya adalah test data. Berdasarkan ke-5 lipatan tadi, berarti  bakal ada 4 lipatan (kita ganti aja ya nyebutnya jadi partisi ajah) x 30  data = 120 training data. Dan sisanya ada 1 partisi test data berisi 30  data.</p>
+<p>Kemudian,  experimen menggunakan data yang udah di partisi-partisi bakal diulang 5  kali (K=5). Tapi posisi partisi Test data berbeda ditiap iterasinya.  Misal di iterasi pertama Test nya di posisi partisi awal, terus iterasi  partisi kedua Test-nya di posisi kedua, dan seterusnya, pokonya gaboleh  sama. Berikut nih gambarannya biar lebih ‘ngeh’.</p>
+<p><img alt="img" src="https://cdn-images-1.medium.com/max/1600/1*ckGj-N4C413FopDgPAK1ug.png" /></p>
+<p>Source : <a href="https://i.stack.imgur.com/1fXzJ.png">https://i.stack.imgur.com/1fXzJ.png</a></p>
+<pre class="codehilite"><code>from sklearn.model_selection import KFold</code></pre>
+
+<pre class="codehilite"><code>kf=KFold(n_splits=5, shuffle=False)
+print(kf)  #buat tau Kfold dan parameter defaultnya
+i=1        #ini gapenting, cuma buat nandain fold nya.</code></pre>
+
+<pre class="codehilite"><code>for train_index, test_index in kf.split(x):
+    print("Fold ", i)
+    print("TRAIN :", train_index, "TEST :", test_index)
+    x_train=x[train_index]
+    x_test=x[test_index]
+    y_train=y[train_index]
+    y_test=y[test_index]
+    i+=1</code></pre>
+
+<pre class="codehilite"><code>print("shape x_train :", x_train.shape)
+print("shape x_test :", x_test.shape)</code></pre>
+
+<p>Naah jadi teman2, apakah yang terjadi disini??
+Jadi  inget, kita punya 150 data dan bakal dibagi 2, train dan test. Jadi  kita bayangin 1 fold dulu deh, Fold yang paling pertama. Disana ada 120  train data dan 30 test data. Terus kalo kamu run code diatas, yang di  print disitu bakal indeks datanya. Inget, indeks doang ya. 
+Jadi  bayangin aja misal di fold pertama itu ada angka 30. Artinya x[30] (x  indeks ke 30) yang berisi 4 kolom data petal dan sepal. begitu deh  seterusnya..</p>
+<p>Kenapa ini harus dilakukan? supaya proses training nya lebih akurat sehingga prediksinya nanti lebih mantap.</p>
+<h3 id="cross-validation">Cross Validation<a class="headerlink" href="#cross-validation" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code>from sklearn.model_selection import cross_val_score</code></pre>
+
+<pre class="codehilite"><code>knn= KNeighborsClassifier(n_neighbors=5)
+score= cross_val_score(knn, x, y, cv=10, scoring='accuracy') 
+print(score)        
+print(score.mean())</code></pre>
+
+<p>Disini  kita coba implementasi cross_validation yang sesungguhnya. ada 5  parameter di cross_val_score. lo bisa liat lebih detail di  dokumentasinya sklearn. Yang jelas ‘cv’=cross validation alias jumlah  fold nya. 
+Ketika score di print bakal ketauan akurasi tiap iterasi.  Kalo kita rata-rata-in, maka scorenya 96%. Sebenernya yang kita code  disini lebih praktis dari partisi-partisian tadi. I mean,  cross_val_score udah nyedian fungsi partisian sendiri jadi kita gausah  pusing kudu ngebagi-bagi data.</p>
+<h3 id="tuning-parameter-hyperparameter">Tuning Parameter (Hyperparameter)<a class="headerlink" href="#tuning-parameter-hyperparameter" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code>k_range = range(1,31)  #1-30
+k_score = []
+</code></pre>
+
+<pre class="codehilite"><code>for k in k_range:
+    knn=KNeighborsClassifier(n_neighbors=k)
+    score= cross_val_score(knn, x, y, cv=10, scoring='accuracy')
+    k_score.append(score.mean())</code></pre>
+
+<pre class="codehilite"><code>print(k_score)</code></pre>
+
+<p>Kalo  ngomongin klasifikasi itu bawaannya seberapa akurat sih klasifikasi  data kita? nah di KNN ni punya beberapa parameter yang menentukan tinggi  rendahnya akurasi klasifikasi kita. Yaitu jumlah K pada KNN. Kita harus  nyobain nih kira2 K=berapa sih yang menghasilkan akurasi paling tinggi?  Proses kaya gini nih, nyari parameter yang akurasinya tinggi, namanya  Tuning Parameter atau biasanya dibilang juga Finding Hyperparameter.</p>
+<p>Disini kita coba 1–30 K. Ntar bakal keliatan K mana yang akurasinya paling jitu.
+Semua  score pada K yang berbeda2 disimpan di variable k_score. Nah kalo kamu  run, hasilnya array yang banyak itu adalah ke 30 score dari K 1–30.</p>
+<p>untuk mempermudah kita akan lihat dengan plotting</p>
+<h3 id="plotting-data">Plotting Data<a class="headerlink" href="#plotting-data" title="Permanent link">&para;</a></h3>
+<pre class="codehilite"><code>import matplotlib.pyplot as plt</code></pre>
+
+<pre class="codehilite"><code>plt.plot(k_range, k_score)
+plt.xlabel('Nomor K')
+plt.ylabel('score K')
+plt.show()</code></pre>
+
+<p><img alt="img" src="https://cdn-images-1.medium.com/max/1600/1*-AQt9cU6x6em0kqr0OSkNg.png" /></p>
+<p>Ada  dua cara  buat nge-plot gambar. Pake Matplotlib atau  Plotly. </p>
+<pre class="codehilite"><code>import plotly.plotly as py
+import plotly.graph_objs as go
+import plotly.tools as tls</code></pre>
+
+<pre class="codehilite"><code>tls.set_credentials_file(username='piyutdyoni', api_key='0fv0PaGxGfWzT72e6S7m')
+trace1 = go.Scatter(
+                    x=k_range, y=k_score, # Data
+                    mode='lines', name='K of KNN' # Additional options
+                   )</code></pre>
+
+<pre class="codehilite"><code>layout = go.Layout(title='Score of K in KNN',
+                   plot_bgcolor='rgb(230)')</code></pre>
+
+<pre class="codehilite"><code>fig = go.Figure(data=[trace1], layout=layout)
+# Plot data in the notebook
+py.iplot(fig, filename='score of K in KNN')</code></pre>
+
+<p><img alt="img" src="https://cdn-images-1.medium.com/max/1600/1*cEFI8cW49L65g4YlPKJikg.png" /></p>
+<p>Jadi  kedua linechart ini menggambarkan kalo K yang menghasilkan score  tertinggi adalah 13, 18, dan 20. Tapi karena batas tertinggi ada di 20,  soalnya abis itu scorenya cenderung turun, maka kita ambil pinalty bahwa  20 adalah K yang paling mentok dan menghasilkan score tinggi. Soo… mari  kita buktikan apakah 20 adalah jawaban yang benar.</p>
+<pre class="codehilite"><code>knn=KNeighborsClassifier(n_neighbors=20)
+score=cross_val_score(knn, x, y, cv=10, scoring='accuracy').mean()
+print(score) #well, hasilnya 98% ^^</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="KNN" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                KNN
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../extensions/admonition/" title="Admonition" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Admonition
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2016 - 2019 Martin Donath
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="http://struct.cc" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/squidfunk" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/squidfunk" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://linkedin.com/in/squidfunk" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8c0d971c.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
